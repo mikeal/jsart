@@ -1,0 +1,33 @@
+{
+  "name": "jsart",
+  "version": "0.0.0",
+  "description": "Generative art showcase.",
+  "main": "index.js",
+  "dependencies": {
+    "beefy": "^1.1.0",
+    "browserify": "^3.41.0",
+    "keycode": "^0.3.0",
+    "response": "^0.13.0"
+  },
+  "devDependencies": {
+    "colors": "^0.6.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikeal/jsart"
+  },
+  "keywords": [
+    "art",
+    "fractals",
+    "browserify"
+  ],
+  "author": "Mikeal Rogers <mikeal.rogers@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mikeal/jsart/issues"
+  },
+  "homepage": "https://github.com/mikeal/jsart"
+}
