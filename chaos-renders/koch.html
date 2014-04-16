@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+    <title>Koch</title>
+    <style type="text/css">
+      html, body { margin: 0px; }
+      canvas { display: block; }
+      div#inputs {
+        position: absolute;
+        z-index:1;
+        left:10px;
+        top:10px;
+      }
+      input {
+        width: 180px;
+        font-style: Helvetica;
+        font-size:40px
+      }
+      div#container {width:100%; height:100%}
+    </style>
+
+    <script type="text/javascript">
+    var maxDepth = 0;
+
+    window.onload = function init() {
+
+
+  		var canvas = document.getElementById("canvas");
+      this.canvas.width = window.innerWidth;
+      this.canvas.height = window.innerHeight;
+
+  		draw(canvas);
+
+  		document.body.addEventListener("keyup", function(event) {
+  			switch(event.keyCode) {
+  				case 32: // space
+  					maxDepth += 1;
+  					draw(canvas);
+  					break;
+
+  				default:
+  					break;
+  			}
+  		});
+  	}
+
+  	function draw(canvas) {
+      var context = canvas.getContext("2d");
+  		var p0 = {
+  			x: canvas.width * 0.1,
+  			y: canvas.height * 0.75
+  		}
+
+  		var p1 = {
+  			x: canvas.width * 0.9,
+  			y: canvas.height * 0.75
+  		}
+
+  		context.clearRect(0, 0, canvas.width, canvas.height);
+  		context.lineWidth = 2;
+
+  		koch(context, p0, p1, maxDepth);
+  	}
+
+  	function koch(context, p0, p1, depth) {
+  		var dx = p1.x - p0.x,
+  			dy = p1.y - p0.y,
+  			// the length of the main segment:
+  			dist = Math.sqrt(dx * dx + dy * dy),
+  			// the length of each sub-segment:
+  			unit = dist / 3,
+  			// the angle of the main segment:
+  			angle = Math.atan2(dy, dx),
+  			pa, pb, pc;
+
+  		// calculate the three intermediate points:
+  		pa = {
+  			x: p0.x + Math.cos(angle) * unit,
+  			y: p0.y + Math.sin(angle) * unit
+  		};
+  		pb = {
+  			x: pa.x + Math.cos(angle - Math.PI / 3) * unit,
+  			y: pa.y + Math.sin(angle - Math.PI / 3) * unit
+  		};
+  		pc = {
+  			x: p0.x + Math.cos(angle) * unit * 2,
+  			y: p0.y + Math.sin(angle) * unit * 2
+  		};
+
+  		if(depth === 0) {
+  			context.beginPath();
+  			context.moveTo(p0.x, p0.y);
+  			context.lineTo(pa.x, pa.y);
+  			context.lineTo(pb.x, pb.y);
+  			context.lineTo(pc.x, pc.y);
+  			context.lineTo(p1.x, p1.y);
+  			context.stroke();
+  		}
+  		else {
+  			koch(context, p0, pa, depth -1);
+  			koch(context, pa, pb, depth -1);
+  			koch(context, pb, pc, depth -1);
+  			koch(context, pc, p1, depth -1);
+  		}
+  	}
+
+    </script>
+  </head>
+  <body>
+    <div id="container">
+      <canvas id="canvas"></canvas>
+<!--       <div id="inputs">
+        <input id="depth" placeholder="Depth" type="text"></input><br>
+        <input id="color" placeholder="Color" type="text"></input><br>
+        <input id="rotation" placeholder="Rotation" type="text"></input><br>
+        <input id="draw" type="submit" value="Draw"></input>
+      </div> -->
+
+    </div>
+  </body>
+</html>
