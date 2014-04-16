@@ -44,7 +44,34 @@
   		});
   	}
 
-  	function draw(canvas) {
+    function draw (canvas) {
+      var context = canvas.getContext("2d")
+      var p0 = {
+        x: canvas.width * 0.32,
+        y: canvas.height * 0.28
+      }
+
+      var p1 = {
+        x: canvas.width * 0.68,
+        y: canvas.height * 0.28
+      }
+
+      var p2 = {
+        x: p1.x + Math.cos(Math.PI * 2 / 3) * (p1.x - p0.x),
+        y: p1.y + Math.sin(Math.PI * 2 / 3) * (p1.x - p0.x)
+      }
+
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      context.lineWidth = 2;
+
+      koch(context, p0, p1, maxDepth);
+      koch(context, p1, p2, maxDepth);
+      koch(context, p2, p0, maxDepth);
+    }
+
+
+  	function drawLine(canvas) {
       var context = canvas.getContext("2d");
   		var p0 = {
   			x: canvas.width * 0.1,
