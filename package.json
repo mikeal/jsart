@@ -4,13 +4,13 @@
   "description": "Generative art showcase.",
   "main": "index.js",
   "dependencies": {
-    "beefy": "^1.1.0",
-    "browserify": "^3.41.0",
-    "keycode": "^0.3.0",
-    "response": "^0.13.0"
+    "beefy": "^2.1.8",
+    "browserify": "^14.4.0",
+    "keycode": "^2.1.9",
+    "response": "^0.18.0"
   },
   "devDependencies": {
-    "colors": "^0.6.2"
+    "colors": "^1.1.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
